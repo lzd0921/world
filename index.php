@@ -86,4 +86,3 @@ $arr = ['7', '6', '3', '5', '4', '2', '1', '9', '-10'];
 
 var_export(insertSort($arr));
 
-ArrayAccess
