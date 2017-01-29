@@ -87,4 +87,5 @@ $arr = ['7', '6', '3', '5', '4', '2', '1', '9', '-10'];
 var_export(insertSort($arr));
 abstract class a {
 	public function a();
+	public function b();
 }
