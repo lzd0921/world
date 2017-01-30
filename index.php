@@ -84,4 +84,30 @@ $arr = ['7', '6', '3', '5', '4', '2', '1', '9', '-10'];
 		return $arr;
 	}
 
-var_export(insertSort($arr));
+//var_export(insertSort($arr));
+
+//一群猴子排成一圈，按1，2，…，n依次编号。然后从第1只开始数，数到第m只,把它踢出圈，从它后面再开始数，
+//再数到第m只，在把它踢出去…，如此不停 的进行下去，直到最后只剩下一只猴子为止，那只猴子就叫做大王。
+//要求编程模拟此过程，输入m、n, 输出最后那个大王的编号。
+
+function monkeyKing($num, $offset) {
+
+    $monkey = range(1, $num);//生猴子
+
+    $baseNum = 1;
+
+    while (count($monkey) > 1) {    //循环到最后留下的就是大王
+        foreach ($monkey as $key => $value) {
+            if($baseNum == $offset) {
+                unset($monkey[$key]);
+                $baseNum = 1;
+            } else {
+                $baseNum ++;
+            }
+        }
+    }
+    var_export(array_values($monkey));
+    $new_arr = array_values($monkey);
+    var_dump($new_arr[0] + 1);
+}
+monkeyKing(10,9);
