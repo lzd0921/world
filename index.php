@@ -130,4 +130,15 @@ function getHeader() {
     var_export($headers);
 }
 
-getHeader();
+//getHeader();
+
+//写一个函数，尽可能高效的从一个标准url中取出扩展名:'http://www.sina.com.cn/abc/de/fg.php?id=1'
+$url = 'http://www.sina.com.cn/lzd/0921/index.php?id=1';
+function getUrl($url) {
+    $urlInfo = parse_url($url);
+    //var_export($urlInfo);
+    //echo substr($url, strrpos($url, '.'), 4);
+    //echo strrchr($url, '.');
+    var_export( pathinfo($urlInfo['path'])['extension']);
+}
+getUrl($url);
