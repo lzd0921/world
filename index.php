@@ -141,4 +141,24 @@ function getUrl($url) {
     //echo strrchr($url, '.');
     var_export( pathinfo($urlInfo['path'])['extension']);
 }
-getUrl($url);
+//getUrl($url);
+
+//写一个函数，可以遍历文件夹下的所有文件和文件夹
+$dir= "D:\\web\\php7";
+function getDirFileInfo($dir) {
+    $handle = opendir($dir);
+    while (false !== ($file = readdir($handle))) { //列出当前目录的所有文件并去掉 . 和 ..
+        if ($file == "." || $file == "..") {
+           continue;
+        }
+        $newDir = $dir . DIRECTORY_SEPARATOR . $file;   //得到路径下面的文件夹
+        if(is_dir($newDir)) {
+            echo "<br>目录：".$newDir . '<br>';
+            getDirFileInfo($newDir);
+        } else {
+            echo "文件：".$dir. DIRECTORY_SEPARATOR .$file .'<br>';
+        }
+    }
+    closedir($handle);
+}
+getDirFileInfo($dir);
