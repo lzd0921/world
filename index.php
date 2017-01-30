@@ -109,3 +109,25 @@ function monkeyKing($num, $offset) {
     var_export(array_values($monkey));
 }
 monkeyKing(10,9);
+
+//写一个函数得到header头信息
+
+function getHeader() {
+    $headers = [];
+    if (!function_exists('getallheaders')) {
+        $headers = getallheaders();
+    } elseif (!function_exists('apache_request_headers')) {
+        $headers = apache_request_headers();
+    } else {
+        foreach ($_SERVER as $key => $value) {
+            if(strstr($key, 'HTTP_')) {
+                $newKey = ucwords(strtolower(str_replace('_', '-', substr($key, 5))));
+                $headers[$newKey] = $value;
+            }
+        }
+
+    }
+    var_export($headers);
+}
+
+getHeader();
