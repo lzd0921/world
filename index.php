@@ -107,7 +107,5 @@ function monkeyKing($num, $offset) {
         }
     }
     var_export(array_values($monkey));
-    $new_arr = array_values($monkey);
-    var_dump($new_arr[0] + 1);
 }
 monkeyKing(10,9);
