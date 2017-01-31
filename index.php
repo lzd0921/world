@@ -162,3 +162,14 @@ function getDirFileInfo($dir) {
     closedir($handle);
 }
 getDirFileInfo($dir);
+
+//引用运算符测试
+function swap(&$x, &$y) {   //形参前的"&"符号不是指针运算符，而是引用
+    $temp = $x;
+    $x = $y;
+    $y = $temp;
+    echo $x.'<->'.$y;
+}
+$x = 1; $y = 2;
+swap($x,$y);
+echo $x,$y;
