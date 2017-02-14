@@ -173,3 +173,18 @@ function swap(&$x, &$y) {   //形参前的"&"符号不是指针运算符，而�
 $x = 1; $y = 2;
 swap($x,$y);
 echo $x,$y;
+
+//写一个函数来解决多线程同时读写同一个文件的问题
+function fileLimit($file) {
+    $handle = fopen($file, 'w+');
+    if (flock($handle, LOCK_EX)) {          //LOCK_EX 取得独占锁定(写入的程序) [ 进行排它型锁定]
+        ftruncate($handle, 0);               //  将文件截断到给定的长度
+        fwrite($handle, "Write something here\n");
+        fflush($handle);                     // 强制将所有缓冲的输出写入 handle 文件句柄所指向的资源[在释放锁定之前刷新输出]
+        flock($handle, LOCK_UN);            // 释放锁定
+    } else {
+        echo "Couldn't get the lock!";
+    }
+    fclose($handle);
+}
+fileLimit("D://web/file.txt");
