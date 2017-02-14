@@ -188,3 +188,24 @@ function fileLimit($file) {
     fclose($handle);
 }
 fileLimit("D://web/file.txt");
+
+//求俩个文件的相对路径
+function getPath($path1, $path2) {
+    $_A = explode('/', ltrim($path1, '/')); //去除左边‘/’并且切割字符串
+    $_B = explode('/', ltrim($path2, '/'));
+    $count = 0; //获取相同路径部分的个数
+    $baseMin = min(count($_A), count($_B)); //以最短的路径做为基准
+
+    for ($i = 0; $i < $baseMin; $i++) {
+        if ($_A[$i] == $_B[$i]) {
+            unset($_A[$i]);
+            $count++;
+        } else {
+            break;
+        }
+    }
+    $path = str_repeat('../', count($_B) - $count - 1) . implode('/', $_A); //总数 - 相同路径数 - 文件数 = ‘所需../’数
+    return $path;
+}
+
+getPath('/a/b/d/12/34/c.php', '/a/b/u/6/7/e.php');
